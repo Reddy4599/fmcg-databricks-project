@@ -1,117 +1,178 @@
-# FMCG Data Engineering & Analytics Project
+# FMCG Data Engineering & Analytics Platform
 
-## Project Overview
+> End-to-end FMCG data engineering and analytics project built with Databricks, PySpark, SQL, Delta Lake, dashboards, Databricks Genie, and GitHub.
 
-This project implements an end-to-end FMCG data engineering and analytics solution using Databricks.
+---
 
-The solution processes FMCG sales and business data through different data layers, performs transformations and aggregations, and provides analytics through dashboards and a natural-language AI assistant.
+## 📌 Project Overview
 
-## Technologies Used
+This project implements an end-to-end **FMCG (Fast-Moving Consumer Goods) data engineering and analytics platform** using Databricks.
 
-- Databricks
-- Apache Spark / PySpark
-- SQL
-- Delta Lake
-- Python
-- Power BI
-- Databricks AI / Genie
-- GitHub
+The solution takes business data through a structured **Bronze → Silver → Gold** data pipeline, performs data cleansing and transformation, creates business-ready datasets, and exposes the results through an interactive analytics dashboard and a natural-language AI assistant.
 
-## Architecture
+The project also includes data quality, monitoring, incremental processing, and Git-based version control.
 
-The project follows a layered data architecture:
+---
 
-Source Data
-    ↓
-Bronze Layer
-    ↓
-Silver Layer
-    ↓
-Gold Layer
-    ↓
-Analytics / Dashboard
-    ↓
-AI Assistant
+## 🎯 Project Objectives
 
-## Main Components
+The main objectives of the project are to:
 
-### 1. Data Processing
+- Build an end-to-end data engineering pipeline on Databricks
+- Implement a Medallion Architecture using Bronze, Silver, and Gold layers
+- Process FMCG sales and business data using PySpark and SQL
+- Create reusable dimension and utility components
+- Implement incremental data processing
+- Perform data cleansing, transformation, and validation
+- Create business-ready Gold-layer datasets
+- Build an interactive FMCG analytics dashboard
+- Enable natural-language analytics using Databricks Genie / AI Assistant
+- Implement monitoring and data-quality checks
+- Maintain project code and documentation using GitHub
 
-The `fmcg_Code` directory contains the main FMCG data processing notebooks.
+---
 
-Responsibilities include:
+# 🏗️ Architecture
 
-- Data ingestion
-- Data transformation
-- Data cleansing
-- Dimension processing
-- Fact processing
-- Incremental data processing
-- Bronze, Silver and Gold layer processing
+The project follows a **Medallion Architecture** implemented on Databricks.
+<img width="1820" height="864" alt="Architecture_diagram" src="https://github.com/user-attachments/assets/34eb44ed-bef5-4da0-944d-7dd063e7c3bb" />
 
-### 2. Setup
+#🥉 Bronze Layer — Raw Data
 
-The `setup` directory contains reusable setup and utility notebooks.
+The Bronze layer is the first data-processing layer.
 
-These include:
+It stores source data after ingestion with minimal transformation, providing a reliable foundation for downstream processing.
 
-- Date dimension creation
-- Project setup
-- Utility functions
+Key Activities
+Ingest source FMCG business data
+Preserve incoming data structure
+Store data using Delta Lake
+Support incremental data ingestion
+Maintain raw/ingested datasets
+Prepare data for Silver-layer processing
+Purpose
 
-### 3. AI Assistant
+The Bronze layer provides a persistent representation of the incoming data and acts as the starting point for subsequent transformations.
 
-The `Chat_bot` directory contains the FMCG AI assistant notebook.
+#🥈 Silver Layer — Cleaned & Transformed Data
 
-The assistant allows users to interact with the processed business data using natural-language questions.
+The Silver layer contains cleaned, standardized, validated, and transformed data.
 
-Example questions include:
+Key Activities
+Data cleansing
+Missing-value handling
+Duplicate validation
+Data-type standardization
+Attribute transformation
+Fact processing
+Dimension processing
+Business-rule application
+Data validation
+Purpose
 
-- What were the total sales this month?
-- Which category generated the highest sales?
-- What are the top-performing products?
-- Which customers generated the highest revenue?
-- How are sales distributed across channels?
+The Silver layer converts raw source data into a cleaner and more consistent structure suitable for business transformations and analytical processing.
 
-### 4. Dashboard
+#🥇 Gold Layer — Business-Ready Data
 
-The processed Gold-layer data is used for business analytics and dashboard reporting.
+The Gold layer contains business-ready datasets designed for reporting and analytics.
 
-The dashboard provides insights into:
+Gold-Layer Analysis
 
-- Sales performance
-- Product performance
-- Category performance
-- Customer performance
-- Channel performance
-- Monthly trends
+The Gold layer supports:
 
-## Data Pipeline
+Revenue analysis
+Product analysis
+Customer analysis
+Category analysis
+Channel analysis
+Monthly trend analysis
+Business aggregations
+Dashboard reporting
+Natural-language analytics
+Purpose
 
-The overall pipeline follows:
+The Gold layer provides analytical datasets that can be consumed by reporting and AI-based analytics applications.
 
-1. Source data ingestion
-2. Bronze layer creation
-3. Data cleansing and transformation
-4. Silver layer creation
-5. Business aggregations
-6. Gold layer creation
-7. Data quality and monitoring
-8. Dashboard reporting
-9. Natural-language analytics using the AI assistant
-10. DASHBOARD_PNG
-<img width="1526" height="886" alt="Screenshot 2026-09-27 192825" src="https://github.com/user-attachments/assets/f7b69130-a5d4-4d6f-8f24-2739854d8bf1" />
+ #⚙️ Data Processing & Transformation
 
+The project uses PySpark, Python, and SQL within Databricks for data processing.
 
-## Project Structure
+The processing workflow includes:
 
-```text
+Reading source data
+Performing project setup
+Creating the date dimension
+Ingesting source data
+Creating Bronze datasets
+Cleaning and validating data
+Processing dimensions
+Processing facts
+Applying transformations
+Creating Gold datasets
+Performing business aggregations
+Validating processed data
+
+#📊 FMCG Analytics Dashboard
+
+The Gold-layer datasets are consumed by an interactive FMCG analytics dashboard.
+
+The dashboard provides a business-oriented view of sales and customer-related metrics.
+
+Key KPIs
+Total Revenue
+Total Customers
+Total Quantity
+Total Products
+Business Analysis
+
+The dashboard supports analysis of:
+
+Monthly revenue trends
+Revenue by category
+Revenue by channel
+Top products
+Top customers
+Market/channel distribution
+Interactive filtering
+KPI-based analysis
+Dashboard Overview
+Dashboard Analysis
+
+#💡 Business Use Cases
+
+The platform supports several FMCG business-analysis requirements.
+
+Sales Analysis
+Revenue tracking
+Monthly revenue trends
+Quantity analysis
+Channel-level sales analysis
+Product Analysis
+Product performance analysis
+Category-level analysis
+Top-product analysis
+Customer Analysis
+Customer revenue analysis
+Customer performance analysis
+High-value customer analysis
+Channel & Market Analysis
+Revenue by channel
+Channel distribution
+Market-level analysis
+Natural-Language Analytics
+
+Business users can interact with the analytical datasets through Databricks Genie using natural-language questions.
+
+#Project_Structre
 fmcg-databricks-project/
 │
-├── Chat_bot/
-│   └── FMCG AI Assistant
+├── Dashboard/
+│   └── FMCG Analytics Dashboard
 │
-├── fmcg_Code/
+├── FMCG_AI_Assistant/
+│   └── FMCG AI Assistant notebook
+│
+├── fcmg_Code/
 │   └── FMCG data processing notebooks
 │
 ├── setup/
@@ -120,4 +181,5 @@ fmcg-databricks-project/
 │   └── dim_date_table_create
 │
 ├── README.md
+│
 └── .gitignore
