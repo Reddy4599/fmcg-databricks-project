@@ -163,7 +163,9 @@ Natural-Language Analytics
 
 Business users can interact with the analytical datasets through Databricks Genie using natural-language questions.
 
-#Project_Structre
+# 📁 Project Structure
+
+```text
 fmcg-databricks-project/
 │
 ├── Dashboard/
