@@ -99,7 +99,7 @@ The overall pipeline follows:
 7. Data quality and monitoring
 8. Dashboard reporting
 9. Natural-language analytics using the AI assistant
-DASHBOARD_PNG
+10. DASHBOARD_PNG
 <img width="1526" height="886" alt="Screenshot 2026-09-27 192825" src="https://github.com/user-attachments/assets/f7b69130-a5d4-4d6f-8f24-2739854d8bf1" />
 
 
