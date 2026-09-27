@@ -3,6 +3,8 @@
 > End-to-end FMCG data engineering and analytics project built with Databricks, PySpark, SQL, Delta Lake, dashboards, Databricks Genie, and GitHub.
 
 ---
+<img width="1526" height="886" alt="Screenshot 2026-09-27 192825" src="https://github.com/user-attachments/assets/6a7617f3-d939-4ece-b936-cbc1bdb32e6d" />
+
 
 ## 📌 Project Overview
 
