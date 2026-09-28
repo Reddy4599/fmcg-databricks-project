@@ -42,11 +42,11 @@ Bronze tables preserve source values, Silver tables hold standardized records, a
 
 `databricks/FMCG_pipeline.py` is a self-contained Databricks notebook source file. Import it into a workspace or open this repository as a Databricks Git folder, then run it on a Databricks Runtime in a schema where you can create Delta tables.
 
-1. Set the `target_schema` widget to a schema where you have table-creation permission. The default is `default` in the current catalog.
+1. In a fresh workspace, run `CREATE SCHEMA IF NOT EXISTS workspace.fmcg_demo` in the SQL editor. Set `target_catalog` and `target_schema` to a location where you can create tables; their defaults are `workspace` and `fmcg_demo`.
 2. Leave the four path widgets empty for the same fictional sample data as the local demo. To use real data, set **all four** widgets to accessible CSV paths. The CSVs must have the columns listed above, including `market,platform,channel` for customers.
 3. Run all cells. The notebook writes `fmcg_bronze_*`, `fmcg_silver_*`, `fmcg_gold_sales`, and five `fmcg_gold_*_sales` Delta tables in the selected schema. It prints row counts and revenue and displays monthly sales.
 
-The notebook rebuilds derived tables on each run, so a rerun cannot add a batch twice. It does not use the original hard-coded S3 bucket. Databricks setup and execution still require a workspace login and a writable schema; this repository does not include or request credentials.
+The notebook was verified on Databricks serverless compute with the fictional sample: 8 Gold orders, 63 units, and ₹6,890 revenue across 14 Delta tables. It rebuilds derived tables on each run, so a rerun cannot add a batch twice. It uses Databricks-managed storage and does not require a personal AWS S3 account for the sample run. The original hard-coded S3 bucket remains a separate private data source; real-data runs require accessible CSV files or appropriate bucket access. This repository does not include or request credentials.
 
 ## Scope of the assistant and dashboard
 

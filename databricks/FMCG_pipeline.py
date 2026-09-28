@@ -9,13 +9,17 @@ Each run replaces derived tables, so rerunning a batch cannot double count order
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 
-dbutils.widgets.text("target_schema", "default", "Writable schema in current catalog")
+dbutils.widgets.text("target_catalog", "workspace", "Writable catalog")
+dbutils.widgets.text("target_schema", "fmcg_demo", "Writable schema")
 for name in ("customers_path", "products_path", "gross_price_path", "orders_path"):
     dbutils.widgets.text(name, "", name)
 
+catalog_name = dbutils.widgets.get("target_catalog").strip()
 schema_name = dbutils.widgets.get("target_schema").strip()
-if not schema_name.replace("_", "").isalnum() or not schema_name[0].isalpha():
-    raise ValueError("target_schema must be a simple schema name")
+for label, value in (("target_catalog", catalog_name), ("target_schema", schema_name)):
+    if not value or not value.replace("_", "").isalnum() or not value[0].isalpha():
+        raise ValueError(f"{label} must be a simple non-empty name")
+spark.sql(f"USE CATALOG `{catalog_name}`")
 spark.sql(f"USE SCHEMA `{schema_name}`")
 spark.conf.set("spark.sql.ansi.enabled", "false")
 
@@ -116,7 +120,8 @@ orders = (orders_bronze
                        F.to_date("order_placement_date", "yyyy/MM/dd"),
                        F.to_date("order_placement_date", "dd-MM-yyyy"),
                        F.to_date("order_placement_date", "dd/MM/yyyy"),
-                       F.to_date("order_placement_date", "EEEE, MMMM d, yyyy")).alias("order_date"))
+                       F.to_date(F.regexp_replace("order_placement_date", r"^[A-Za-z]+,\s*", ""),
+                                 "MMMM d, yyyy")).alias("order_date"))
     .filter((F.col("order_id") != "") & (F.col("order_qty") > 0) & F.col("order_date").isNotNull())
     .withColumn("rn", F.row_number().over(Window.partitionBy("order_id").orderBy("order_date")))
     .filter(F.col("rn") == 1).drop("rn"))
@@ -154,5 +159,5 @@ if gold_count == 0:
     raise ValueError("No sales reached Gold; check IDs, prices, dates, and schema")
 print(f"Bronze orders={source_count}; Silver valid orders={valid_count}; Gold sales={gold_count}")
 print(f"Rejected before Silver={source_count-valid_count}; unmatched after Silver={valid_count-gold_count}")
-print(f"Revenue INR={revenue}; target schema={schema_name}")
+print(f"Revenue INR={revenue}; target schema={catalog_name}.{schema_name}")
 display(spark.table(table("gold_monthly_sales")).orderBy("month"))
