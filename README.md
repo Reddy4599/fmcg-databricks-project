@@ -1,5 +1,16 @@
 # FMCG Data Engineering & Analytics Platform
 
+## Run it now
+
+This repository now includes a reproducible local run with fictional sample data, a live dashboard, tests, and a clean Databricks notebook. See [RUN.md](RUN.md) for the exact commands and source-data format.
+
+```powershell
+python fmcg_local.py build
+python fmcg_local.py serve
+```
+
+The original notebooks and screenshots remain for reference. They depend on the original Databricks workspace and S3 data; use `databricks/FMCG_pipeline.py` for a fresh Databricks run.
+
 > End-to-end FMCG data engineering and analytics project built with Databricks, PySpark, SQL, Delta Lake, dashboards, Databricks Genie, and GitHub.
 
 ---
@@ -187,3 +198,4 @@ fmcg-databricks-project/
 ├── README.md
 │
 └── .gitignore
+```

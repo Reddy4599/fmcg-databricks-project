@@ -76,3 +76,7 @@ data/temp/
 .idea/
 
 
+
+# Reproducible local run
+local/
+!sample_data/*.csv
