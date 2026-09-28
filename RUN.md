@@ -7,7 +7,7 @@ This repository contains a runnable local pipeline and a Databricks notebook. Th
 No pip packages, Java, cloud credentials, or paid account are needed.
 
 ```powershell
-cd C:\Users\ASUS\Music\fmcg-databricks-project
+cd C:\Users\ASUS\Videos\fmcg-databricks-project
 python fmcg_local.py build
 python fmcg_local.py serve
 ```
